@@ -3,6 +3,7 @@ from capymoa.anomaly import (
     HalfSpaceTrees,
     OnlineIsolationForest,
     Autoencoder,
+    StreamRandomHistogramForest
 )
 from capymoa.base import Classifier, AnomalyDetector
 from capymoa.base import MOAClassifier
@@ -21,11 +22,13 @@ from capymoa.stream._stream import Schema
         (partial(HalfSpaceTrees, window_size=100, number_of_trees=25, max_depth=15), 0.54, None),
         (partial(OnlineIsolationForest, window_size=100, num_trees=32, max_leaf_samples=32), 0.49, None),
         (partial(Autoencoder, hidden_layer=2, learning_rate=0.5, threshold=0.6), 0.42, None),
+        (partial(StreamRandomHistogramForest, window_size=100, num_trees=100, max_height=5), 0.5, None)
     ],
     ids=[
         "HalfSpaceTrees",
         "OnlineIsolationForest",
         "Autoencoder",
+        "StreamRandomHistogramForest",
     ],
 )
 def test_anomaly_detectors(
